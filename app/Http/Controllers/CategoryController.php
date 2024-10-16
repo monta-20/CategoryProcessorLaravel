@@ -23,7 +23,7 @@ class CategoryController extends Controller
         $c->description = $request->description; //description is in input filed name="description"
 
         if($c->save()){//Sauvgarde $c in table categories
-            return redirect("category/list") ;
+            return redirect("category/list")->with('msg','Your Category has adding with succes'); 
         }else{
             return "The data is not save";
         }
@@ -39,5 +39,13 @@ class CategoryController extends Controller
         $categories = Category::all();
        // dd($categories);
         return view('list')->with('categories',$categories);
+    }
+    //Delete Category 
+    public function deleteCategory($id){
+        $categories =Category::find($id); //retrives category by id
+
+        $categories->delete(); //delete category
+
+        return redirect("category/list")->with('msg','Your Category has delete with succes');//redirect to page list after delete
     }
 }

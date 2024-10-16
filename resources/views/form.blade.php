@@ -42,7 +42,9 @@
             </div>
              @error("name")
              {{-- name in input name="name" --}}
-                 {{ $message }}
+             <div style="color: red; font-weight: bold;">
+                {{ $message }}
+            </div>
              @enderror
             <!-- Category Description Input -->
             <div class="mb-3">
@@ -50,9 +52,10 @@
                 <textarea class="form-control" id="categoryDescription" name="description" rows="3" placeholder="Enter category description" value = {{ @old('description') }}></textarea>
             </div>
             @error("description")
-               {{ $message }}
+            <div style="color: red; font-weight: bold;">
+                {{ $message }}
+            </div>
             @enderror
-
             <!-- Submit Button -->
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>

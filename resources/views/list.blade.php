@@ -31,12 +31,18 @@
 <body>
     <div class="container mt-5">
         <h2 class="mb-4">Categories</h2>
+        @if ($message = Session::get('msg'))
+             <div class="alert alert-success" role="alert">
+                  {{ $message }}
+             </div>
+        @endif
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
                     <th scope="col">Description</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -45,7 +51,9 @@
                         <th scope="row">{{ $category->id }}</th>
                         <td>{{ $category->name }}</td>
                         <td>{{ $category->description }}</td>
+                       <td> <a class="btn btn-danger" href="/category/delete/{{ $category->id }}">Delete</a></td>
                     </tr>
+                    
                 @endforeach
             </tbody>
         </table>
@@ -55,7 +63,7 @@
             </div>
         @endif
     </div>
-
+       
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 </body>
 </html>

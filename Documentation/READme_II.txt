@@ -43,3 +43,33 @@
     (for example, due to validation errors).
     - in addController when i add back to : "category/list"
      ==> return redirect("category/list")
+12. Delete Data & Flash Message   
+       -Task : Create button supprimer to delete category
+       -Path : "/category/delete/{id}"
+       -Treatement : CategoryController =>deleteCategory(id)
+       -Result : redirect to page list("/category/list")
+    - in CategoryController : //Delete Category 
+          public function deleteCategory($id){
+              $categories =Category::find($id); //retrives category by id
+      
+              $categories->delete(); //delete category
+
+              return redirect("category/list")->with('msg','Your Category has delete with succes');
+          }
+    - in web.php :  Route::get('/category/delete/{id}', [CategoryController::class, 'deleteCategory']);
+       ==>example when i visit : http://127.0.0.1:8000/category/delete/7 is delete id 7.
+    - in list.blade.php i create button in form link :<td> <a class="btn btn-danger" href="/category/delete/{{ $category->id }}">Delete</a></td>
+    - after delete category give me message i explain this :
+      - return redirect("category/list")->with('msg','Your Category has delete with succes'); //so i pass a data as message
+      - in list.blade.php : 
+           @if ($message = Session::get('msg'))
+                 <div class="alert alert-success" role="alert">
+                      {{ $message }}
+                 </div>
+            @endif
+            // Session::get('msg') :retrieves a session value associated with the key 'msg' and stores it in the variable $message.  
+      - Do the same in function addCategory {
+            .............
+            return redirect("category/list")->with('msg','Your Category has adding with succes'); //beacuse in the same redirect
+      }      
+    -Now in model i use static function (all , find) ..... and function (save , delete).       

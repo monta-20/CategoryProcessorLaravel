@@ -24,3 +24,6 @@ Route::post('/category/add', [CategoryController::class, 'AddCategory']);
 // Get List Categories
 Route::get('/category/list', [CategoryController::class, 'ListCategory']);
 
+// Delete Category
+Route::get('/category/delete/{id}', [CategoryController::class, 'deleteCategory']);
+
